@@ -14,17 +14,25 @@ import RxSwift
 #endif
 import UIKit
 
-extension UITextField {
+extension UITextField : RxTextInput {
     
     /**
     Reactive wrapper for `text` property.
     */
     public var rx_text: ControlProperty<String> {
-        return rx_value(getter: { [weak self] in
-            self?.text ?? ""
-        }, setter: { [weak self] value in
-            self?.text = value
-        })
+        return UIControl.rx_value(
+            self,
+            getter: { textField in
+                textField.text ?? ""
+            }, setter: { textField, value in
+                // This check is important because setting text value always clears control state
+                // including marked text selection which is imporant for proper input 
+                // when IME input method is used.
+                if textField.text != value {
+                    textField.text = value
+                }
+            }
+        )
     }
     
 }
