@@ -25,7 +25,7 @@ class RxCBPeripheralManagerDelegateProxy: DelegateProxy, CBPeripheralManagerDele
     }
     
     func peripheralManagerDidUpdateState(peripheral: CBPeripheralManager) {
-        interceptedSelector("peripheralManagerDidUpdateState:", withArguments: [peripheral])
+        interceptedSelector(#selector(CBPeripheralManagerDelegate.peripheralManagerDidUpdateState(_:)), withArguments: [peripheral])
     }
 
 }
@@ -38,7 +38,7 @@ extension CBPeripheralManager {
     For more information take a look at `DelegateProxyType` protocol documentation.
     */
     public var rx_delegate: DelegateProxy {
-        return proxyForObject(RxCBPeripheralManagerDelegateProxy.self, self)
+        return RxCBPeripheralManagerDelegateProxy.proxyForObject(self)
 
     }
     

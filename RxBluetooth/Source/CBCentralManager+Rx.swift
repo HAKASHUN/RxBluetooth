@@ -41,7 +41,7 @@ extension CBCentralManager {
     For more information take a look at `DelegateProxyType` protocol documentation.
     */
     public var rx_delegate: DelegateProxy {
-        return proxyForObject(RxCBCentralManagerDelegateProxy.self,self)
+        return RxCBCentralManagerDelegateProxy.proxyForObject(self)
     }
     
     // MARK: Responding to CB Central Manager
