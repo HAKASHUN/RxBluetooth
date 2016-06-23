@@ -27,6 +27,10 @@ class RxCBCentralManagerDelegateProxy: DelegateProxy, CBCentralManagerDelegate, 
     internal func centralManagerDidUpdateState(central: CBCentralManager) {
         interceptedSelector(#selector(CBCentralManagerDelegate.centralManagerDidUpdateState(_:)), withArguments: [central])
     }
+
+    internal func centralManager(central: CBCentralManager, willRestoreState dict: [String : AnyObject]) {
+        interceptedSelector(#selector(CBCentralManagerDelegate.centralManager(_:willRestoreState:)), withArguments: [central, dict])
+    }
 }
 
 extension CBCentralManager {
