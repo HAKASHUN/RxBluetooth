@@ -25,7 +25,7 @@ class RxCBCentralManagerDelegateProxy: DelegateProxy, CBCentralManagerDelegate, 
     }
     
     internal func centralManagerDidUpdateState(central: CBCentralManager) {
-        interceptedSelector("centralManagerDidUpdateState:", withArguments: [central])
+        interceptedSelector(#selector(CBCentralManagerDelegate.centralManagerDidUpdateState(_:)), withArguments: [central])
     }
 }
 
@@ -46,7 +46,7 @@ extension CBCentralManager {
     Reactive wrapper for `delegate` message.
     */
     public var rx_didUpdateState: Observable<CBCentralManagerState!> {
-        return rx_delegate.observe("centralManagerDidUpdateState:")
+        return rx_delegate.observe(#selector(CBCentralManagerDelegate.centralManagerDidUpdateState(_:)))
             .map { a in
                 return (a[0] as? CBCentralManager)?.state
         }
@@ -56,7 +56,7 @@ extension CBCentralManager {
     Reactive wrapper for `delegate` message.
     */
     public var rx_willRestoreState: Observable<[String : AnyObject]!> {
-        return rx_delegate.observe("centralManager:willRestoreState:")
+        return rx_delegate.observe(#selector(CBCentralManagerDelegate.centralManager(_:willRestoreState:)))
             .map { a in
                 return a[1] as? [String : AnyObject]
         }
@@ -66,7 +66,7 @@ extension CBCentralManager {
     Reactive wrapper for `delegate` message.
     */
     public var rx_didDiscoverPeripheral: Observable<(CBPeripheral!, [String : AnyObject]!, NSNumber!)> {
-        return rx_delegate.observe("centralManager:didDiscoverPeripheral:advertisementData:RSSI:")
+        return rx_delegate.observe(#selector(CBCentralManagerDelegate.centralManager(_:didDiscoverPeripheral:advertisementData:RSSI:)))
             .map { a in
                 return (a[1] as? CBPeripheral, a[2] as? [String : AnyObject], a[3] as? NSNumber)
         }
@@ -76,7 +76,7 @@ extension CBCentralManager {
     Reactive wrapper for `delegate` message.
     */
     public var rx_didConnectPeripheral: Observable<CBPeripheral!> {
-        return rx_delegate.observe("centralManager:didConnectPeripheral:")
+        return rx_delegate.observe(#selector(CBCentralManagerDelegate.centralManager(_:didConnectPeripheral:)))
             .map { a in
                 return a[1] as? CBPeripheral
         }
@@ -86,7 +86,7 @@ extension CBCentralManager {
     Reactive wrapper for `delegate` message.
     */
     public var rx_didFailToConnectPeripheral: Observable<(CBPeripheral!, NSError?)> {
-        return rx_delegate.observe("centralManager:didFailToConnectPeripheral:error:")
+        return rx_delegate.observe(#selector(CBCentralManagerDelegate.centralManager(_:didFailToConnectPeripheral:error:)))
             .map { a in
                 return (a[1] as? CBPeripheral, a[2] as? NSError)
         }
@@ -96,7 +96,7 @@ extension CBCentralManager {
     Reactive wrapper for `delegate` message.
     */
     public var rx_didDisconnectPeripheral: Observable<(CBPeripheral!, NSError?)> {
-        return rx_delegate.observe("centralManager:didDisconnectPeripheral:error:")
+        return rx_delegate.observe(#selector(CBCentralManagerDelegate.centralManager(_:didDisconnectPeripheral:error:)))
             .map { a in
                 return (a[1] as? CBPeripheral, a[2] as? NSError)
         }

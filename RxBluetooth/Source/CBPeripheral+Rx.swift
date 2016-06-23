@@ -42,7 +42,7 @@ extension CBPeripheral {
     Reactive wrapper for `delegate` message.
     */
     public var rx_didUpdateName: Observable<String?> {
-        return rx_delegate.observe("peripheralDidUpdateName:")
+        return rx_delegate.observe(#selector(CBPeripheralDelegate.peripheralDidUpdateName(_:)))
             .map { a in
                 return (a[0] as? CBPeripheral)?.name
         }
@@ -52,7 +52,7 @@ extension CBPeripheral {
     Reactive wrapper for `delegate` message.
     */
     public var rx_didModifyServices: Observable<[CBService]!> {
-        return rx_delegate.observe("peripheral:didModifyServices:")
+        return rx_delegate.observe(#selector(CBPeripheralDelegate.peripheral(_:didModifyServices:)))
             .map { a in
                 return (a[1] as? [CBService])
         }
@@ -63,7 +63,7 @@ extension CBPeripheral {
     */
     @available(iOS 8.0, *)
     public var rx_didReadRSSI: Observable<(NSNumber!, NSError?)> {
-        return rx_delegate.observe("peripheral:didReadRSSI:error:")
+        return rx_delegate.observe(#selector(CBPeripheralDelegate.peripheral(_:didReadRSSI:error:)))
             .map { a in
                 return (a[1] as? NSNumber, a[2] as? NSError)
         }
@@ -74,7 +74,7 @@ extension CBPeripheral {
     */
 
     public var rx_didDiscoverServices: Observable<([CBService]?, NSError?)> {
-        return rx_delegate.observe("peripheral:didDiscoverServices:")
+        return rx_delegate.observe(#selector(CBPeripheralDelegate.peripheral(_:didDiscoverServices:)))
             .map { a in
                 return (self.services, a[1] as? NSError)
         }
@@ -85,7 +85,7 @@ extension CBPeripheral {
     */
 
     public var rx_didDiscoverIncludedServicesForService: Observable<(CBService!, NSError?)> {
-        return rx_delegate.observe("peripheral:didDiscoverIncludedServicesForService:error:")
+        return rx_delegate.observe(#selector(CBPeripheralDelegate.peripheral(_:didDiscoverIncludedServicesForService:error:)))
             .map { a in
                 return (a[1] as? CBService, a[2] as? NSError)
         }
@@ -96,7 +96,7 @@ extension CBPeripheral {
     */
 
     public var rx_didDiscoverCharacteristicsForService: Observable<(CBService!, NSError?)> {
-        return rx_delegate.observe("peripheral:didDiscoverCharacteristicsForService:error:")
+        return rx_delegate.observe(#selector(CBPeripheralDelegate.peripheral(_:didDiscoverCharacteristicsForService:error:)))
             .map { a in
                 return (a[1] as? CBService, a[2] as? NSError)
         }
@@ -107,7 +107,7 @@ extension CBPeripheral {
     */
 
     public var rx_didUpdateValueForCharacteristic: Observable<(CBCharacteristic!, NSError?)> {
-        return rx_delegate.observe("peripheral:didUpdateValueForCharacteristic:error:")
+        return rx_delegate.observe(#selector(CBPeripheralDelegate.peripheral(_:didUpdateValueForCharacteristic:error:)))
             .map { a in
                 return (a[1] as? CBCharacteristic, a[2] as? NSError)
         }
@@ -118,7 +118,7 @@ extension CBPeripheral {
     */
 
     public var rx_didWriteValueForCharacteristic: Observable<(CBCharacteristic!, NSError?)> {
-        return rx_delegate.observe("peripheral:didWriteValueForCharacteristic:error:")
+        return rx_delegate.observe(#selector(CBPeripheralDelegate.peripheral(_:didWriteValueForCharacteristic:error:)))
             .map { a in
                 return (a[1] as? CBCharacteristic, a[2] as? NSError)
         }
@@ -129,7 +129,7 @@ extension CBPeripheral {
     */
 
     public var rx_didUpdateNotificationStateForCharacteristic: Observable<(CBCharacteristic!, NSError?)> {
-        return rx_delegate.observe("peripheral:didUpdateNotificationStateForCharacteristic:error:")
+        return rx_delegate.observe(#selector(CBPeripheralDelegate.peripheral(_:didUpdateNotificationStateForCharacteristic:error:)))
             .map { a in
                 return (a[1] as? CBCharacteristic, a[2] as? NSError)
         }
@@ -140,7 +140,7 @@ extension CBPeripheral {
     */
 
     public var rx_didDiscoverDescriptorsForCharacteristic: Observable<(CBCharacteristic!, NSError?)> {
-        return rx_delegate.observe("peripheral:didDiscoverDescriptorsForCharacteristic:error:")
+        return rx_delegate.observe(#selector(CBPeripheralDelegate.peripheral(_:didDiscoverDescriptorsForCharacteristic:error:)))
             .map { a in
                 return (a[1] as? CBCharacteristic, a[2] as? NSError)
         }
@@ -151,7 +151,7 @@ extension CBPeripheral {
     */
 
     public var rx_didUpdateValueForDescriptor: Observable<(CBDescriptor!, NSError?)> {
-        return rx_delegate.observe("peripheral:didUpdateValueForDescriptor:error:")
+        return rx_delegate.observe(#selector(CBPeripheralDelegate.peripheral(_:didUpdateValueForDescriptor:error:)))
             .map { a in
                 return (a[1] as? CBDescriptor, a[2] as? NSError)
         }
@@ -162,7 +162,7 @@ extension CBPeripheral {
     */
 
     public var rx_didWriteValueForDescriptor: Observable<(CBDescriptor!, NSError?)> {
-        return rx_delegate.observe("peripheral:didWriteValueForDescriptor:error:")
+        return rx_delegate.observe(#selector(CBPeripheralDelegate.peripheral(_:didWriteValueForDescriptor:error:)))
             .map { a in
                 return (a[1] as? CBDescriptor, a[2] as? NSError)
         }
